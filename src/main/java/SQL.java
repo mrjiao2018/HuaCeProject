@@ -52,7 +52,7 @@ public class SQL {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(URL,USER_NAME,PASSWORD);
             //排序
-            String AQIOrderSQL = "select * from AirDataBase by AQI desc limit 10";
+            String AQIOrderSQL = "select top 20 * from AirDataBase by AQI desc";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(AQIOrderSQL);
             while(rs.next())

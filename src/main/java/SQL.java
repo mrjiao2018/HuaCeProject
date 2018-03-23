@@ -10,19 +10,18 @@ import java.util.List;
 * @param:  * @param null
 */
 public class SQL {
-    private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-    private static final String URL = "";
-    private static final String USER_NAME = "";
-    private static final String PASSWORD = "";
+    private static final String URL = "DESKTOP-OCSELUV-OCSELUV\\SQLEPRESS;database=AirDataBase";
+    private static final String USER_NAME = "sa";
+    private static final String PASSWORD = "lzb52967357";
     private Connection conn = null;
     //具体城市查询
     public CityInformation searchResult(String cityName) {
         CityInformation cityInfo = new CityInformation();
         try {
-            Class.forName(DRIVER_NAME);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(URL,USER_NAME,PASSWORD);
             //查询
-            String selectSQL = "select * from AirDataBase.dbo.DayRecord where city = 'cityName'";
+            String selectSQL = "select * from AirDataBase.dbo.DayRecord where city = " + "'cityName'";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(selectSQL);
             //输出结果
@@ -50,7 +49,7 @@ public class SQL {
     {
         List<CityInformation> AQICity = new ArrayList<CityInformation>();
         try {
-            Class.forName(DRIVER_NAME);
+            Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(URL,USER_NAME,PASSWORD);
             //排序
             String AQIOrderSQL = "select * from AirDataBase by AQI desc limit 10";

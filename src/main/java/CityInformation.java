@@ -2,7 +2,7 @@ public class CityInformation {
     private String name;
     private String AQI;
     private String pollutant;
-    private String recordData;
+    private String recordDate;
     private String airQuality;
 
     public String getName() {
@@ -29,12 +29,12 @@ public class CityInformation {
         this.pollutant = pollutant;
     }
 
-    public String getRecordData() {
-        return recordData;
+    public String getRecordDate() {
+        return recordDate;
     }
 
-    public void setRecordData(String recordData) {
-        this.recordData = recordData;
+    public void setRecordDate(String recordDate) {
+        this.recordDate = recordDate;
     }
 
     public String getAirQuality() {

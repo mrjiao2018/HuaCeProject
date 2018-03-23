@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container"></div>
+</body>
+<script type="text/javascript">
+    $.sjw.ajax(
+        {
+            className: "me.jarvis.simplejweb.demo.ajax.DemoAjax",
+            method: "testCall",
+            param: {demoInt: 1, demoString: "s"},
+            success: function (result)
+            {
+                alert(result.demoDate)
+            }
+        });
+</script>
+</html>

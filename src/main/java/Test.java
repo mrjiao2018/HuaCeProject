@@ -1,3 +1,7 @@
+
+
+import org.json.JSONObject;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -5,6 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Test extends HttpServlet {
+    private void sendInfo(CityInformation city, HttpServletRequest resp) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", city.getName());
+        jsonObject.put("AQI",city.getAQI());
+        jsonObject.put("AirQuality", city.getAirQuality());
+        jsonObject.put("Pollutant",city.getPollutant());
+        jsonObject.put("RecordDate", city.getRecordDate());
+
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //设置编码格式
@@ -18,6 +32,9 @@ public class Test extends HttpServlet {
         //查询
         SQL sql = new SQL();
         CityInformation city = sql.searchResult(input);
+
+        //将CityInformation通过JSON传递到前端
+
 
         //TEST
         System.out.println(city);

@@ -10,9 +10,9 @@ import java.util.List;
 * @param:  * @param null
 */
 public class SQL {
-    private static final String URL = "DESKTOP-OCSELUV-OCSELUV\\SQLEPRESS;database=AirDataBase";
+    private static final String URL = "jdbc:sqlserver://LAPTOP-DO412DJ1\\SQLEXPRESS:1433;database=AirDataBase";
     private static final String USER_NAME = "sa";
-    private static final String PASSWORD = "lzb52967357";
+    private static final String PASSWORD = "lzb529673457";
     private Connection conn = null;
     //具体城市查询
     public CityInformation searchResult(String cityName) {
@@ -21,10 +21,12 @@ public class SQL {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(URL,USER_NAME,PASSWORD);
             //查询
-            String selectSQL = "select * from AirDataBase.dbo.DayRecord where city = " + "'cityName'";
+            String selectSQL = "select * from DayRecord where city = '" + cityName+"'";
+            System.out.println(selectSQL);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(selectSQL);
             //输出结果
+            rs.next();
             cityInfo.setName(rs.getString("city"));
             cityInfo.setAQI(rs.getString("AQI"));
             cityInfo.setPollutant(rs.getString("pollutant"));

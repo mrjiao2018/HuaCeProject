@@ -7,23 +7,72 @@
     <title>百度地图API自定义地图</title>
     <!--引用百度地图API-->
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4rKgAEhmkiTqU9Ve2MHodRXHyXcG5SBH"></script>
+    <style type="text/css">
+        body{
+            background-color: aliceblue;
+        }
+        .container {
+            width:1000px;
+            margin: 20px auto;
+        }
+        .leftBar {
+            float: left;
+        }
+        .rightBar {
+            height: 200px;
+            width: 300px;
+            float: right;
+            /*border: 1px solid blue;*/
+        }
+        input{
+            height: 30px;
+            width: 200px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px auto;
+            font-size: 12px;
+        }
+        .submitBtn{
+            font-size: 14px;
+        }
+        .submitBtn:hover {
+            background-color: #ffb;
+        }
+        #map {
+            height: 700px;
+            margin-top:20px;
+            clear: both;
+        }
+    </style>
 </head>
 
 <body>
-<!--百度地图容器-->
-<div style="width:1920px;height:1080px;font-size:12px" id="map"></div>
+<div class="container">
+    <div class="leftBar">
+        <h2 class = "header">全国省会城市污染状况查询</h2>
+        <p class = "header inputHelp">请输入省会城市名称进行查询</p>
+        <div class = "header inputBox">
+            <form action="/test" method = "get">
+                <input type="text" name = "city" class = "inputCity"><br>
+                <input type="submit" name = "city" value = "查询" class = "submitBtn">
+            </form>
+        </div>
+    </div>
+    <div class = "rightBar"></div>
+    <div id="map"></div>
+</div>
 </body>
 <script type="text/javascript">
     //创建和初始化地图函数：
     function initMap(){
         createMap();//创建地图
-        setMapEvent();//设置地图事件
-        addMapControl();//向地图添加控件
+        //setMapEvent();//设置地图事件
+        //addMapControl();//向地图添加控件
         addMapOverlay();//向地图添加覆盖物
     }
     function createMap(){
         map = new BMap.Map("map");
-        map.centerAndZoom(new BMap.Point(116.403874,39.914889),12);
+        map.centerAndZoom(new BMap.Point(108.06,36.07),5);
     }
     function setMapEvent(){
         map.enableScrollWheelZoom();
@@ -32,12 +81,18 @@
         map.enableDoubleClickZoom()
     }
     function addClickHandler(target,window){
-        target.addEventListener("click",function(){
+        target.addEventListener("click",function(e){
             target.openInfoWindow(window);
         });
     }
     function addMapOverlay(){
+
     }
+
+
+    var map;
+    initMap();
+
     //向地图添加控件
     function addMapControl(){
         var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
@@ -48,7 +103,12 @@
         var overviewControl = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:true});
         map.addControl(overviewControl);
     }
-    var map;
-    initMap();
+
+    //信息接受及展示
+    function infoReceive() {
+
+    }
+    infoReceive();
+
 </script>
 </html>

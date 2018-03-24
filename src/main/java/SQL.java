@@ -1,22 +1,23 @@
-import javax.xml.transform.Result;
+import vo.CityInformation;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
-* @Author: Jinglin Chen
-* @Description:
-* @Date: 16:04 2018/3/23
-* @param:  * @param null
-*/
+ * @Author: Jinglin Chen
+ * @Description:
+ * @Date: 16:04 2018/3/23
+ * @param:  * @param null
+ */
 public class SQL {
     private static final String URL = "jdbc:sqlserver://LAPTOP-DO412DJ1\\SQLEXPRESS:1433;database=AirDataBase";
     private static final String USER_NAME = "sa";
     private static final String PASSWORD = "lzb529673457";
     private Connection conn = null;
     //具体城市查询
-    public CityInformation searchResult(String cityName) {
-        CityInformation cityInfo = new CityInformation();
+    public List<CityInformation>  searchResult(String cityName) {
+        List<CityInformation> cityInfo = new ArrayList<CityInformation>();
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(URL,USER_NAME,PASSWORD);
@@ -26,12 +27,14 @@ public class SQL {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(selectSQL);
             //输出结果
-            rs.next();
-            cityInfo.setName(rs.getString("city"));
-            cityInfo.setAQI(rs.getString("AQI"));
-            cityInfo.setPollutant(rs.getString("pollutant"));
-            cityInfo.setRecordDate(rs.getString("recordDate"));
-            cityInfo.setAirQuality(rs.getString("airQuality"));
+            while(rs.next()) {
+                CityInformation tempCity = new CityInformation();
+                tempCity.setAQI(rs.getString("AQI"));
+                tempCity.setPollutant(rs.getString("pollutant"));
+                tempCity.setRecordDate(rs.getString("recordDate"));
+                tempCity.setAirQuality(rs.getString("airQuality"));
+                cityInfo.add(tempCity);
+            }
             rs.close();
             stmt.close();
         }

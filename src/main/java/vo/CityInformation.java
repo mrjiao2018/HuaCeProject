@@ -1,3 +1,5 @@
+package vo;
+
 public class CityInformation {
     private String name;
     private String AQI;

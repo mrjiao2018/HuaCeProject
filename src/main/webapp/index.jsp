@@ -5,7 +5,10 @@
   Time: 16:08
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" import ="java.*"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" import ="java.*, vo.CityInformation"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="vo.CityInformation" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,6 +18,7 @@
     <title>百度地图API自定义地图</title>
     <!--引用百度地图API-->
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4rKgAEhmkiTqU9Ve2MHodRXHyXcG5SBH"></script>
+    <script src="echarts.common.min.js"></script>
     <style type="text/css">
         body{
             background-color: aliceblue;
@@ -66,7 +70,7 @@
             </form>
         </div>
     </div>
-    <div class = "rightBar"></div>
+    <div class = "rightBar" id = "main"></div>
     <div id="map"></div>
 </div>
 </body>
@@ -115,9 +119,37 @@
     //信息接受及展示
     function infoReceive() {
         <%
-            Object obj = request.getAttribute("city");
-            //CityInformation cityInformation = new CityInformation();
+            ArrayList list = (ArrayList)request.getAttribute("cities");
+            ArrayList AQIs = new ArrayList();
+            ArrayList dates=new ArrayList();
+            ArrayList pollutions=new ArrayList();
+            ArrayList airQualitys=new ArrayList();
+            for(int i = 0; i < list.size(); i+=4) {
+                CityInformation city = (CityInformation) list.get(i);
+                AQIs.add(Integer.parseInt(city.getAQI()));
+                dates.add(city.getRecordDate());
+                pollutions.add(city.getPollutant());
+                airQualitys.add(city.getAirQuality());
+            }
         %>
+        var myChart = echarts.init(document.getElementById('main'));
+        option = {
+            title: {
+                text: '历时30天空气质量指数折线图'
+            },
+            xAxis: {
+                type: 'category',
+                data: [<%=dates.get(0)%>, <%=dates.get(1)%>, <%=dates.get(2)%>, <%=dates.get(3)%>, <%=dates.get(4)%>, <%=dates.get(5)%>, <%=dates.get(6)%>]
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [<%=AQIs.get(0)%>, <%=AQIs.get(1)%>, <%=AQIs.get(2)%>, <%=AQIs.get(3)%>, <%=AQIs.get(4)%>, <%=AQIs.get(5)%>, <%=AQIs.get(6)%>],
+                type: 'line'
+            }]
+        };
+        myChart.setOption(option);
     }
     infoReceive();
 

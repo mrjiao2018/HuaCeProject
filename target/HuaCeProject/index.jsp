@@ -5,7 +5,10 @@
   Time: 16:08
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" import ="java.*, vo.CityInformation"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="vo.CityInformation" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,6 +18,7 @@
     <title>百度地图API自定义地图</title>
     <!--引用百度地图API-->
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4rKgAEhmkiTqU9Ve2MHodRXHyXcG5SBH"></script>
+    <script src="echarts.common.min.js"></script>
     <style type="text/css">
         body{
             background-color: aliceblue;
@@ -66,7 +70,7 @@
             </form>
         </div>
     </div>
-    <div class = "rightBar"></div>
+    <div class = "rightBar" id = "main"></div>
     <div id="map"></div>
 </div>
 </body>
@@ -114,7 +118,35 @@
 
     //信息接受及展示
     function infoReceive() {
-
+        <%--<%--%>
+            <%--ArrayList list = (ArrayList)request.getAttribute("cities");--%>
+            <%--ArrayList AQIs = new ArrayList();--%>
+            <%--ArrayList dates=new ArrayList();--%>
+            <%--ArrayList pollutions=new ArrayList();--%>
+            <%--ArrayList airQualitys=new ArrayList();--%>
+            <%--for(int i = 0; i < list.size(); ++i) {--%>
+                <%--CityInformation city = (CityInformation) list.get(i);--%>
+                <%--AQIs.add(Integer.parseInt(city.getAQI()));--%>
+                <%--dates.add(city.getRecordDate());--%>
+                <%--pollutions.add(city.getPollutant());--%>
+                <%--airQualitys.add(city.getAirQuality());--%>
+            <%--}--%>
+        <%--%>--%>
+        var myChart = echarts.init(document.getElementById('main'));
+        option = {
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'line'
+            }]
+        };
+        myChart.setOption(option);
     }
     infoReceive();
 

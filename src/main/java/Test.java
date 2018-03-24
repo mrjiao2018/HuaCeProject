@@ -1,12 +1,14 @@
 
 
 import org.json.JSONObject;
+import vo.CityInformation;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public class Test extends HttpServlet {
     private void sendInfo(CityInformation city, HttpServletRequest resp) {
@@ -30,14 +32,12 @@ public class Test extends HttpServlet {
         System.out.println(input);
 
         //查询
-        SQL sql = new SQL();
-        CityInformation city = sql.searchResult(input);
+//        SQL sql = new SQL();
+//        List<CityInformation> cities = sql.searchResult(input);
 
         //将CityInformation返回到index.jsp
-        req.setAttribute("city", city);
+//        req.setAttribute("cities", cities);
         req.getRequestDispatcher("/index.jsp").forward(req, resp);
 
-        //TEST
-        System.out.println(city);
     }
 }

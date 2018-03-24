@@ -33,8 +33,9 @@ public class Test extends HttpServlet {
         SQL sql = new SQL();
         CityInformation city = sql.searchResult(input);
 
-        //将CityInformation通过JSON传递到前端
-
+        //将CityInformation返回到index.jsp
+        req.setAttribute("city", city);
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
 
         //TEST
         System.out.println(city);

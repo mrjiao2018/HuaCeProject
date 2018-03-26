@@ -5,7 +5,7 @@
   Time: 16:08
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" import ="java.*, vo.CityInformation"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.CityInformation" %>
@@ -31,8 +31,8 @@
             float: left;
         }
         .rightBar {
-            height: 200px;
-            width: 300px;
+            height: 250px;
+            width: 600px;
             float: right;
             /*border: 1px solid blue;*/
         }
@@ -135,7 +135,7 @@
         var myChart = echarts.init(document.getElementById('main'));
         option = {
             title: {
-                text: '北京市历时30天空气质量指数折线图'
+                text: '北京市历时30天空气质量指数折线图（AQI指数）'
             },
             xAxis: {
                 type: 'category',

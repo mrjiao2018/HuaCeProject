@@ -31,8 +31,8 @@
             float: left;
         }
         .rightBar {
-            height: 200px;
-            width: 300px;
+            height: 250px;
+            width: 600px;
             float: right;
             /*border: 1px solid blue;*/
         }
@@ -124,7 +124,7 @@
             <%--ArrayList dates=new ArrayList();--%>
             <%--ArrayList pollutions=new ArrayList();--%>
             <%--ArrayList airQualitys=new ArrayList();--%>
-            <%--for(int i = 0; i < list.size(); ++i) {--%>
+            <%--for(int i = 0; i < list.size(); i+=4) {--%>
                 <%--CityInformation city = (CityInformation) list.get(i);--%>
                 <%--AQIs.add(Integer.parseInt(city.getAQI()));--%>
                 <%--dates.add(city.getRecordDate());--%>
@@ -134,15 +134,20 @@
         <%--%>--%>
         var myChart = echarts.init(document.getElementById('main'));
         option = {
+            title: {
+                text: '北京市历时30天空气质量指数折线图（AQI指数）'
+            },
             xAxis: {
                 type: 'category',
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                <%--data: [<%=dates.get(0)%>, <%=dates.get(1)%>, <%=dates.get(2)%>, <%=dates.get(3)%>, <%=dates.get(4)%>, <%=dates.get(5)%>, <%=dates.get(6)%>]--%>
+                data: ['02-24', '02-28', '03-04', '03-08', '03-12', '03-16', '03-20']
             },
             yAxis: {
                 type: 'value'
             },
             series: [{
-                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                <%--data: [<%=AQIs.get(0)%>, <%=AQIs.get(1)%>, <%=AQIs.get(2)%>, <%=AQIs.get(3)%>, <%=AQIs.get(4)%>, <%=AQIs.get(5)%>, <%=AQIs.get(6)%>],--%>
+                data: [62, 117, 129, 63, 195, 56, 46],
                 type: 'line'
             }]
         };

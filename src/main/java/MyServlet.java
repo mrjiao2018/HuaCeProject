@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Test extends HttpServlet {
+public class MyServlet extends HttpServlet {
     private void sendInfo(CityInformation city, HttpServletRequest resp) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", city.getName());
@@ -37,7 +38,19 @@ public class Test extends HttpServlet {
 
         //将CityInformation返回到index.jsp
 //        req.setAttribute("cities", cities);
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
 
+        //测试代码
+        List<CityInformation> cities = new ArrayList<CityInformation>();
+        for (int i = 0; i < 30; ++i) {
+            CityInformation city = new CityInformation();
+            city.setName("北京市");
+            city.setAirQuality("优");
+            city.setAQI("" + i);
+            city.setPollutant("pm2.5");
+            city.setRecordDate("2018-03-" + (i + 1));
+            cities.add(city);
+        }
+        req.setAttribute("cities", cities);
+        req.getRequestDispatcher("/showResults.jsp").forward(req, resp);
     }
 }

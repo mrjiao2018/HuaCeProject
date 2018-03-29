@@ -22,7 +22,7 @@ public class SQL {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(URL,USER_NAME,PASSWORD);
             //查询
-            String selectSQL = "select * from DayRecord where city = '" + cityName+"'";
+            String selectSQL = "select * from DayRecord where city LIKE '" + cityName+"'";
             System.out.println(selectSQL);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(selectSQL);

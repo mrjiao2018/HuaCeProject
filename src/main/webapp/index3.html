@@ -2,9 +2,12 @@
 <html style="height: 100%">
 <head>
     <meta charset="utf-8">
-    <title>全国主要空气质量</title>
+    <title>全国主要城市空气质量</title>
 </head>
 <body style="height: 100%; margin: 0">
+<form action="/test" id = "citySubmit">
+    <input type="hidden" name="cityName" id = "cityName">
+</form>
 <div id="container" style="height: 100%"></div>
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
@@ -595,7 +598,10 @@
         myChart.setOption(option, true);
     }
     myChart.on('click', function (e) {
-        console.log(e.name);
+        var cityName = document.getElementById("cityName");
+        var myForm = document.getElementById("citySubmit");
+        cityName.value = e.name + "市";
+        myForm.submit();
     })
 </script>
 </body>

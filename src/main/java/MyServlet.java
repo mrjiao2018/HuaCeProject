@@ -29,28 +29,31 @@ public class MyServlet extends HttpServlet {
         resp.setContentType("text/html; charset = utf-8");
 
         //从前端接受字符串
-        String input = req.getParameter("input");
-        System.out.println(input);
+        String cityName = req.getParameter("cityName");
+        System.out.println(cityName);
 
         //查询
-//        SQL sql = new SQL();
-//        List<CityInformation> cities = sql.searchResult(input);
+        SQL sql = new SQL();
+        List<CityInformation> cities = sql.searchResult(cityName);
 
-        //将CityInformation返回到index.jsp
-//        req.setAttribute("cities", cities);
-
-        //测试代码
-        List<CityInformation> cities = new ArrayList<CityInformation>();
-        for (int i = 0; i < 30; ++i) {
-            CityInformation city = new CityInformation();
-            city.setName("北京市");
-            city.setAirQuality("优");
-            city.setAQI("" + i);
-            city.setPollutant("pm2.5");
-            city.setRecordDate("2018-03-" + (i + 1));
-            cities.add(city);
-        }
+        //将CityInformation返回到showResults.jsp
         req.setAttribute("cities", cities);
         req.getRequestDispatcher("/showResults.jsp").forward(req, resp);
+
+        //测试代码
+//        List<CityInformation> cities = new ArrayList<CityInformation>();
+//        for (int i = 0; i < 30; ++i) {
+//            CityInformation city = new CityInformation();
+//            city.setName("北京市");
+//            city.setAirQuality("优");
+//            city.setAQI("" + i);
+//            city.setPollutant("pm2.5");
+//            city.setRecordDate("2018-03-" + (i + 1));
+//            cities.add(city);
+//        }
+//        req.setAttribute("cities", cities);
+//        System.out.println("pre_Dispatcher_test");
+//        req.getRequestDispatcher("/showResults.jsp").forward(req, resp);
+//        System.out.println("after_Dispatcher_test");
     }
 }
